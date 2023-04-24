@@ -3,10 +3,10 @@ import pika
 import json
 from os import getenv
 
-RABBITMQ_HOST = getenv('RABBITMQ_HOST','rabbitmq-tcp.titcs-devops.com.br')
-RABBITMQ_PORT = getenv("RABBITMQ_PORT", "5672")
-RABBITMQ_PASSWD = getenv("RABBITMQ_PASSWD", "U#aBrpd5873P!@sdRCMQW")
-FUNCTION_APP = getenv("FUNCTION_APP","fapp-inovacao")
+RABBITMQ_HOST = getenv('RABBITMQ_HOST')
+RABBITMQ_PORT = getenv("RABBITMQ_PORT")
+RABBITMQ_PASSWD = getenv("RABBITMQ_PASSWD")
+FUNCTION_APP = getenv("FUNCTION_APP")
 
 class MessageBroker():
     
