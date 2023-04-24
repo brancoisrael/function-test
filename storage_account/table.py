@@ -5,8 +5,8 @@ from azure.data.tables import TableServiceClient
 from azure.data.tables import TableServiceClient
 
 
-AZURE_ACCOUNT_NAME = getenv('AZURE_STORAGE_ACCOUNT', 'sainovacao')
-AZURE_ACCOUNT_KEY = getenv('AZURE_ACCOUNT_KEY', 'axgraMGHPVZ7remAx60ne376KBy717ENWsAz8q7Hc6iMDCEUVR9iB042GhUMIJwHYD5FFzMoJLl++AStUDNiFg==')
+AZURE_ACCOUNT_NAME = getenv('AZURE_ACCOUNT_NAME')
+AZURE_ACCOUNT_KEY = getenv('AZURE_ACCOUNT_KEY')
 
 class Table():
     

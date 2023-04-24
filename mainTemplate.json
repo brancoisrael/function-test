@@ -3,16 +3,70 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
       "storageAccountName": {
-        "type": "String"
+        "type": "String" ,
+        "metadata": {
+          "description": "Nome do storage account, este nome será utilizazdo em demais contextos da aplicação."
+        }       
+      },      
+     "storageAccountType": {
+        "type": "string",
+        "defaultValue": "Standard_LRS",
+        "allowedValues": [
+          "Premium_LRS",
+          "Premium_ZRS",
+          "Standard_GRS",
+          "Standard_GZRS",
+          "Standard_LRS",
+          "Standard_RAGRS",
+          "Standard_RAGZRS",
+          "Standard_ZRS"
+        ],
+        "metadata": {
+          "description": "Tipo de armazenamento storage account."
+        }
       },
       "serverFarmeName": {
-        "type": "String"
+        "type": "String",
+        "metadata": {
+          "description": "Nome do  Server Farm utilizado "
+        }
       },
       "applicationInsightsName": {
-        "type": "String"
+        "type": "String",
+        "metadata": {
+          "description": "Nome do Application Insight utilizado"
+        }
       },
       "functionAppName": {
-        "type": "String"
+        "type": "String",
+        "metadata": {
+          "description": "Nome do Function APP, este nome será utilizado em demais contextos da aplicação."
+        }
+      },
+      "functionAppType":{
+        "type": "string",
+        "defaultValue": "F1",
+        "allowedValues":[                   
+          "B1",   //Basic       an B1 Basic
+          "B2",   //Basic       an B2 Basic
+          "B3",   //Basic       an B3 Basic
+          "S1",   //Standard    an S1 Standard
+          "S2",   //Standard    an S2 Standard
+          "S3",   //Standard    an S3 Standard
+          "P1",   //Premium     an P1 Premium
+          "P2",   //Premium     an P2 Premium
+          "P3",   //Premium     an P3 Premium
+          "P1V2", //PremiumV2   an P1V2 PremiumV2
+          "P2V2", //PremiumV2   an P2V2 PremiumV2
+          "P3V2", //PremiumV2   an P3V2 PremiumV2
+          "I1",   //Isolated    an I2 Isolated
+          "I2",   //Isolated    an I2 Isolated
+          "I3",   //Isolated    an I3 Isolated
+          "Y1",   //Dynamic     a  function consumption plan
+          "EP1",  //ElasticPremium
+          "EP2",  //ElasticPremium
+          "EP3"   //ElasticPremium 
+        ]
       }
     },
     "variables": {},
@@ -24,8 +78,7 @@
         "name": "[parameters('storageAccountName')]",
         "location": "[resourceGroup().location]",
         "sku": {
-          "name": "Standard_LRS",
-          "tier": "Standard"
+          "name": "[parameters('storageAccountType')]"
         },
         "kind": "Storage"
       },
@@ -35,11 +88,7 @@
         "name": "[parameters('serverFarmeName')]",
         "location": "[resourceGroup().location]",
         "sku": {
-          "name": "P1v2",
-          "tier": "PremiumV2",
-          "size": "P1v2",
-          "family": "Pv2",
-          "capacity": 1
+          "name": "[parameters('functionAppType')]"
         },
         "properties": {
           "hyperV": false,
@@ -94,6 +143,20 @@
               {
                 "name": "WEBSITE_NODE_DEFAULT_VERSION",
                 "value": "~18"
+              },
+              {
+                "name":"AZURE_ACCOUNT_NAME",
+                "value": "[parameters('storageAccountName')]"
+              }
+              ,
+              {
+                "name":"AZURE_ACCOUNT_KEY",
+                "value": "[listKeys(resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccountName')), '2019-06-01').keys[0].value]"
+              }
+              ,
+              {
+                "name":"BUCKET_NAME",
+                "value": "live4safe"
               }
             ],
             "linuxFxVersion": "PYTHON|3.9",
@@ -110,7 +173,7 @@
               "[resourceId('Microsoft.Web/sites', parameters('functionAppName'))]"
             ],
             "properties": {
-              "branch": "develop",
+              "branch": "main",
               "repoUrl": "https://github.com/brancoisrael/function-test.git"
             }
           }
