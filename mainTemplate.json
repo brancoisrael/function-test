@@ -177,6 +177,16 @@
                 "name":"RABBITMQ_PASSWD",
                 "value": "U#aBrpd5873P!@sdRCMQW"
               }
+              ,
+              {
+                "name":"URL",
+                "value": "https://l4s-api.titcs-devops.com.br"
+              }
+              ,
+              {
+                "name":"BCC_PASSWD",
+                "value": "U#aBrpd5873P!@sdRCMQW"
+              }
               
             ],
             "linuxFxVersion": "PYTHON|3.9",
