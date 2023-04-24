@@ -179,12 +179,12 @@
               }
               ,
               {
-                "name":"URL",
+                "name":"L4S_API_URL",
                 "value": "https://l4s-api.titcs-devops.com.br"
               }
               ,
               {
-                "name":"BCC_PASSWD",
+                "name":"L4S_PASSWD",
                 "value": "U#aBrpd5873P!@sdRCMQW"
               }
               
