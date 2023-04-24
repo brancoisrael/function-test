@@ -4,8 +4,8 @@ import azure.functions as func
 from os import getenv
 from background_check.background_check_message import BackGroundCheckMessage as message
 
-URL = getenv('URL','https://l4s-api.titcs-devops.com.br')
-PASSWORD = getenv('BCC_PASSWD','U#aBrpd5873P!@sdRCMQW')
+URL = getenv('URL')
+PASSWORD = getenv('BCC_PASSWD')
 
 class BackgroundCheckService():
     
