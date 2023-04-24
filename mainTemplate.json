@@ -157,7 +157,27 @@
               {
                 "name":"BUCKET_NAME",
                 "value": "live4safe"
+              },
+              {
+                "name":"FUNCTION_APP",
+                "value": "[parameters('functionAppName')]"
               }
+              ,
+              {
+                "name":"RABBITMQ_HOST",
+                "value": "rabbitmq-tcp.titcs-devops.com.br"
+              }
+              ,
+              {
+                "name":"RABBITMQ_PORT",
+                "value": "5672"
+              }
+              ,
+              {
+                "name":"RABBITMQ_PASSWD",
+                "value": "U#aBrpd5873P!@sdRCMQW"
+              }
+              
             ],
             "linuxFxVersion": "PYTHON|3.9",
             "alwaysOn": true,
