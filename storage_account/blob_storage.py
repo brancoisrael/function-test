@@ -14,7 +14,7 @@ class BlobStorage():
             logging.info("Azure Blob Storage v" + __version__)
             connection_string = getenv('AzureWebJobsStorage')
             self.blob_service_client = BlobServiceClient.from_connection_string(connection_string)
-            self.container_client = self.blob_service_client.create_container(BUCKET_NAME)
+            self.container_client = self.blob_service_client.create_container(name=BUCKET_NAME,public_access='blob')
 
         except exceptions.ResourceExistsError as ex:
             logging.info(f"Container '{BUCKET_NAME}' already exists")
