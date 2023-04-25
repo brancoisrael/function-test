@@ -69,7 +69,9 @@
         ]
       }
     },
-    "variables": {},
+    "variables": {
+
+    },
     "functions": [],
     "resources": [
       {
@@ -186,8 +188,11 @@
               {
                 "name":"L4S_PASSWD",
                 "value": "U#aBrpd5873P!@sdRCMQW"
-              }
-              
+              },
+              {
+                "name": "SUBSCRIPTION_ID",
+                "value":"[subscription().subscriptionId]"
+              }              
             ],
             "linuxFxVersion": "PYTHON|3.9",
             "alwaysOn": true,
