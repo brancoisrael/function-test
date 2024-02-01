@@ -1,4 +1,5 @@
 import azure.functions as func
+import asyncio
 from base.message_broker import MessageBroker
 
 class LivenessMessage(MessageBroker):
@@ -21,4 +22,4 @@ class LivenessMessage(MessageBroker):
                     "callback":self.get_callback('liveness')}
         
         for fila in self.filas:
-            self.publish(fila, message)
+            asyncio.run(self.publish(fila, message))

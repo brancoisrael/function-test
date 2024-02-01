@@ -1,6 +1,7 @@
 import azure.functions as func
 from storage_account.blob_storage import blob_storage
 from base.message_broker import MessageBroker
+import asyncio
 
 class OCRMessage(MessageBroker):
     
@@ -17,12 +18,12 @@ class OCRMessage(MessageBroker):
                    "ip_request":self.get_ip(req),
                    "callback":self.get_callback('ocr')}       
         
-        self.publish('ocr', message)
+        asyncio.run(self.publish('ocr', message))
 
         message = {"liveness_id": ocr['RowKey'],
                    "token": self.get_token(req),
                    "ip_request":self.get_ip(req),
                    "algorithm":'2'}
         
-        self.publish('monitor_request', message)
+        asyncio.run(self.publish('monitor_request', message))
         

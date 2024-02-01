@@ -5,14 +5,16 @@ from utils.local_file import write_file
 import logging
 import tempfile
 
-BUCKET_NAME = getenv("BUCKET_NAME", "live4safe")
+BUCKET_NAME = getenv("BUCKET_NAME")
+AZURE_ACCOUNT_NAME = getenv('AZURE_ACCOUNT_NAME')
+AZURE_ACCOUNT_KEY = getenv('AZURE_ACCOUNT_KEY')
 
 class BlobStorage():
     
     def __init__(self) -> None:
         try:
             logging.info("Azure Blob Storage v" + __version__)
-            connection_string = getenv('AzureWebJobsStorage')
+            connection_string = f'DefaultEndpointsProtocol=https;AccountName={AZURE_ACCOUNT_NAME};AccountKey={AZURE_ACCOUNT_KEY};EndpointSuffix=core.windows.net'
             self.blob_service_client = BlobServiceClient.from_connection_string(connection_string)
             self.container_client = self.blob_service_client.create_container(name=BUCKET_NAME,public_access='blob')
 
@@ -65,7 +67,7 @@ class BlobStorage():
 
     def get_url_prefix(self) -> str:
         return (
-            f"https://{getenv('AZURE_ACCOUNT_NAME')}.blob.core.windows.net/{BUCKET_NAME}/"
+            f"https://{AZURE_ACCOUNT_NAME}.blob.core.windows.net/{BUCKET_NAME}/"
         )
            
 blob_storage = BlobStorage()

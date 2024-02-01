@@ -1,6 +1,5 @@
 import azure.functions as func
 import json
-from storage_account.blob_storage import blob_storage
 from storage_account.table import Table
 from base.message_broker import MessageBroker
 

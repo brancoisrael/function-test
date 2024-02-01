@@ -5,6 +5,7 @@ from datetime import datetime
 from liveness.liveness_message import LivenessMessage as Message
 from base.abstract_service import AbstractService
 from os import path , remove
+from utils.blob_file import get_file
 import base64
 import uuid
 import tempfile
@@ -17,12 +18,15 @@ class LivenessService(AbstractService):
         self.partition_key = 'liveness'
 
     def create (self,req: func.HttpRequest) -> func.HttpResponse:
-        if 'video' not in req.files:
+        file = get_file(req=req,file_url='video_path',field_name='video')
+
+        if 'video' not in req.files and file == None:
             return func.HttpResponse(
             "Video not found.",
             status_code=400)        
         
-        file = req.files['video']
+        if file == None:
+            file = req.files['video']
         file_name = blob_storage.save_file(file)
         
         liveness = Liveness()

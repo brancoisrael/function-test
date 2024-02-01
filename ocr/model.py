@@ -14,4 +14,5 @@ class OCR():
         self.cpf:str
         self.ocr:list
         self.ocr_status = StatusEnum.queued.name
+        self.billing = False
         

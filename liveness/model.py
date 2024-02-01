@@ -23,4 +23,5 @@ class Liveness():
         self.same_face: str
         self.voice_recognition_status = StatusEnum.queued.name
         self.voice_recognition: str
+        self.billing = False
         

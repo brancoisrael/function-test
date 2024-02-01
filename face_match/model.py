@@ -13,3 +13,4 @@ class FaceMatch():
         self.image_b:str
         self.face_match_status = StatusEnum.queued.name
         self.face_match: bool
+        self.billing = False
