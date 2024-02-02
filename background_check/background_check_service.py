@@ -7,8 +7,8 @@ from os import getenv
 from background_check.background_check_message import BackGroundCheckMessage as message
 from storage_account.table import Table
 
-URL = getenv('URL')
-#URL = getenv('URL','http://localhost:8000')
+L4S_API_URL = getenv('L4S_API_URL')
+#L4S_API_URL = getenv('L4S_API_URL','http://localhost:8000')
 
 PASSWORD = getenv('BCC_PASSWD','U#aBrpd5873P!@sdRCMQW')
 
@@ -25,7 +25,7 @@ class BackgroundCheckService():
                 status_code=400)     
               
         data = {'username':'azure','password':PASSWORD}
-        resp = requests.post(f'{URL}/api-token-auth/',data=data)
+        resp = requests.post(f'{L4S_API_URL}/api-token-auth/',data=data)
         
         if resp.status_code != 200:
             return resp
@@ -33,7 +33,7 @@ class BackgroundCheckService():
         message().send(req)
         token = json.loads(resp.text)['token']
         headers = {'Authorization': f'token {token}'}
-        resp = requests.get(f"{URL}/background_check/{req.params.get('cpf')}",headers=headers)
+        resp = requests.get(f"{L4S_API_URL}/background_check/{req.params.get('cpf')}",headers=headers)
        
         data = json.loads(resp.text)
         data['PartitionKey']=self.partition_key
